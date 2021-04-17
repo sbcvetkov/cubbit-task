@@ -1,0 +1,7 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo building images
+      - cd ./nginx-proxy && docker build -t kube-nginx-proxy .
+      - cd ../react-image-compressor && docker build -t kube-react-image-compressor .

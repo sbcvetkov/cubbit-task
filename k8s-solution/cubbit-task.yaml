@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cubbit-service
+  labels: 
+    run: cubbit-task
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    run: cubbit-task
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: cubbit-task
+  name: cubbit-task
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+     run: cubbit-task
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        run: cubbit-task
+    spec:
+      containers:
+        - name: kube-react-image-compressor
+          image: kube-react-image-compressor
+          imagePullPolicy: Never
+        - image: kube-nginx-proxy
+          name: kube-nginx-proxy
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+      restartPolicy: Always

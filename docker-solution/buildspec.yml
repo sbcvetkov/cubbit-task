@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo build Docker images on `date`
+      - cd containers/nginx-proxy && docker build -t kube-nginx-proxy .
+      - cd containers/react-image-compressor && docker build -t kube-react-image-compressor .
+  post_build:
+    commands:
+      - echo bringing up the infra!
+      - cd ../ && docker-compose up -d

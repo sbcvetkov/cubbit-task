@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: react-image-compressor
+  name: react-image-compressor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: react-image-compressor
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: react-image-compressor
+    spec:
+      containers:
+        - image: react-image-compressor
+          name: react-image-compressor
+          resources: {}
+      hostname: react-image-compressor
+      restartPolicy: Always
+status: {}

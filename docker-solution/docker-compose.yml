@@ -1,0 +1,16 @@
+---
+  version: '3'
+  services:
+    nginx-proxy:
+      container_name: nginx-proxy
+      hostname: nginx-proxy
+      image: nginx-proxy
+      ports:
+        - 8080:8080
+      links:
+        - react-image-compressor:react-image-compressor
+        
+    react-image-compressor:
+        hostname: react-image-compressor
+        container_name: react-image-compressor
+        image: react-image-compressor
